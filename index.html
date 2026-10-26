@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Живёте ли вы так, как хочется</title>
+<meta name="description" content="Упражнение про четыре сферы жизни: что для вас важно, как сейчас и что вы для этого делаете.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap">
+<style>
+:root{
+  --фон:#FFF9F4; --фон-2:#F5EAE2; --текст:#2A2230; --текст-тихий:#6E6470; --линия:#EADFD8;
+  --тёмный:#2F1C3D; --тёмный-светлее:#3B2450; --коралл:#D92A3E; --коралл-ярче:#FF4A5A; --коралл-мягкий:#FFC9CD;
+  --шрифт-заголовков:Montserrat,Arial,sans-serif; --шрифт-текста:'Open Sans',-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--фон);color:var(--текст);font:400 17px/1.6 var(--шрифт-текста);min-height:100vh}
+.обёртка{max-width:640px;margin:0 auto;padding:28px 16px 64px}
+.экран[hidden]{display:none}
+.метка{font-size:14px;color:var(--текст-тихий);margin:0 0 20px;letter-spacing:.02em}
+h1,h2{font-family:var(--шрифт-заголовков);font-weight:600;line-height:1.2;margin:0 0 18px;color:var(--текст)}
+h1{font-size:clamp(30px,8vw,44px)}
+h2{font-size:clamp(25px,6.5vw,32px)}
+h2:focus{outline:none}
+.подводка{margin:0 0 14px;color:var(--текст)}
+.тихо{color:var(--текст-тихий)}
+label.вопрос{display:block;font-family:var(--шрифт-заголовков);font-weight:600;font-size:20px;line-height:1.3;margin:28px 0 10px}
+textarea{width:100%;min-height:112px;padding:14px 16px;border:1.5px solid var(--линия);border-radius:14px;background:#fff;
+  font:400 17px/1.5 var(--шрифт-текста);color:var(--текст);resize:vertical}
+textarea:focus{outline:none;border-color:var(--коралл);box-shadow:0 0 0 3px rgba(217,42,62,.18)}
+.подсказка-кнопка{background:none;border:0;padding:8px 0;margin-top:2px;color:var(--тёмный);font:600 15px var(--шрифт-текста);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.подсказка{margin:6px 0 0;padding:12px 16px;background:var(--фон-2);border-radius:12px;font-size:15.5px;color:var(--текст)}
+.ряд{display:flex;align-items:center;gap:20px;margin-top:34px;flex-wrap:wrap}
+.назад{background:none;border:0;padding:12px 4px;color:var(--текст-тихий);font:600 16px var(--шрифт-текста);cursor:pointer}
+
+/* главная кнопка: тёмная, объёмная, без мерцания */
+.главная{border:0;cursor:pointer;color:#fff;font:600 18px var(--шрифт-текста);
+  padding:16px 34px;border-radius:999px;min-height:54px;
+  background:linear-gradient(180deg,var(--тёмный-светлее) 0%,var(--тёмный) 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.22),inset 0 -3px 0 rgba(0,0,0,.28),0 6px 16px rgba(47,28,61,.3)}
+.главная:active{transform:translateY(2px)}
+.главная:focus-visible,.назад:focus-visible,.подсказка-кнопка:focus-visible{outline:3px solid var(--коралл);outline-offset:3px}
+
+.карта-образ{width:80%;margin:4px auto 0;border-radius:18px;overflow:hidden;box-shadow:0 6px 20px rgba(47,28,61,.18)}
+.карта-образ img{display:block;width:100%;height:auto}
+.пара{background:#fff;border:1px solid var(--линия);border-radius:16px;padding:18px 18px 16px;margin:0 0 14px}
+.пара h3{font-family:var(--шрифт-заголовков);font-size:19px;margin:0 0 12px;color:var(--коралл)}
+.пара dl{margin:0;display:grid;gap:10px}
+.пара dt{font-size:13px;color:var(--текст-тихий);letter-spacing:.03em;text-transform:uppercase}
+.пара dd{margin:2px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+@media (min-width:640px){.пара dl{grid-template-columns:1fr 1fr 1fr;gap:20px}}
+.пусто{color:var(--текст-тихий)}
+.итог-вопрос{font-family:var(--шрифт-заголовков);font-weight:600;font-size:22px;margin:28px 0 0}
+.карты{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px}
+.карта{border-radius:16px;padding:14px 14px 13px;min-height:132px}
+.карта.светлая{background:var(--коралл-мягкий);color:var(--текст)}
+.карта.тёмная{background:var(--тёмный);color:#fff}
+.карта b{display:block;font:600 17px/1.25 var(--шрифт-заголовков);margin-bottom:6px}
+.карта span{font-size:14px;line-height:1.4;opacity:.92}
+.знак{font-size:26px;line-height:1;margin-bottom:8px}
+.плашка{display:inline-block;margin:0 0 18px;padding:10px 18px;background:#fff;border:1.5px solid var(--коралл-мягкий);
+  border-radius:14px;font-size:15.5px;color:var(--тёмный);box-shadow:0 2px 8px rgba(47,28,61,.08)}
+.конец{margin:28px 0 0;color:var(--текст-тихий)}
+</style>
+</head>
+<body>
+<main class="обёртка">
+
+<section class="экран" id="вход">
+  <h1>Вы живёте так, как хочется, или так, как удобно другим?</h1>
+  <p class="подводка">Разберём четыре сферы жизни:</p>
+  <div class="карты">
+    <div class="карта светлая"><div class="знак">🤍</div><b>Отношения</b><span>семья, партнёр, дети, родители, подруги</span></div>
+    <div class="карта тёмная"><div class="знак">🌱</div><b>Работа и развитие</b><span>дело, деньги, учёба, новое</span></div>
+    <div class="карта тёмная"><div class="знак">🌿</div><b>Здоровье и забота о себе</b><span>сон, питание, тело, самочувствие</span></div>
+    <div class="карта светлая"><div class="знак">☕</div><b>Отдых</b><span>всё, что возвращает силы</span></div>
+  </div>
+  <p class="плашка">🔒 Ответы никуда не отправляются</p>
+  <p class="подводка">Как у вас, так и правильно.</p>
+  <div class="ряд"><button class="главная" type="button" id="начать">Начать</button></div>
+</section>
+
+<section class="экран" id="сфера" hidden>
+  <p class="метка" id="счётчик"></p>
+  <h2 id="название" tabindex="-1"></h2>
+  <p class="подводка" id="пояснение" hidden></p>
+  <figure class="карта-образ" id="образ" hidden><img id="образ-картинка" alt="" width="1000" height="1200"></figure>
+  <label class="вопрос" id="вопрос" for="ответ"></label>
+  <textarea id="ответ" rows="5"></textarea>
+  <button class="подсказка-кнопка" type="button" id="подсказка-кнопка" aria-expanded="false" aria-controls="подсказка" hidden>Нужна подсказка</button>
+  <p class="подсказка" id="подсказка" hidden></p>
+  <div class="ряд">
+    <button class="назад" type="button" id="назад">Назад</button>
+    <button class="главная" type="button" id="дальше">Дальше</button>
+  </div>
+</section>
+
+<section class="экран" id="итог" hidden>
+  <h2 id="итог-заголовок" tabindex="-1">Вот что получилось</h2>
+  <div id="пары"></div>
+  <p class="итог-вопрос">Где слова расходятся?</p>
+
+  <label class="вопрос" for="мешает">Что мешает?</label>
+  <textarea id="мешает" rows="4"></textarea>
+  <label class="вопрос" for="шаг">Что вы сделаете на этой неделе?</label>
+  <textarea id="шаг" rows="3"></textarea>
+
+  <div class="ряд">
+    <button class="главная" type="button" id="сохранить">Сохранить картинкой</button>
+    <button class="назад" type="button" id="правка">Изменить ответы</button>
+  </div>
+  <p class="конец">Вернитесь к этому через неделю.</p>
+</section>
+
+</main>
+<script>
+(function(){
+  var СФЕРЫ=[
+    {имя:'Отношения',
+     пояснение:'Отношения — это семья, муж или партнёр, дети, родители, подруги. Все, с кем вы рядом и кто рядом с вами.',
+     вопросы:['Что для вас важно в отношениях?','А как сейчас?','Что вы для этого делаете?'],
+     пример:'Например: взаимопонимание, любовь, уважение, взаимопомощь'},
+    {имя:'Работа и развитие',
+     пояснение:'Работа и развитие — это дело, которым вы занимаетесь, деньги, учёба, то, чему хочется научиться.',
+     вопросы:['Что для вас важно в работе и развитии?','А как сейчас?','Что вы для этого делаете?'],
+     пример:'Например: заниматься тем, что приносит хороший доход. Или тем, что нравится'},
+    {имя:'Здоровье и забота о себе',
+     пояснение:'Здоровье и забота о себе — это сон, питание, тело, самочувствие и внимание к себе.',
+     вопросы:['Что для вас важно в здоровье и заботе о себе?','А как сейчас?','Что вы для этого делаете?'],
+     пример:'Например: выспаться. Здоровое тело, красивая фигура'},
+    {имя:'Отдых',
+     пояснение:'Отдых — это всё, что возвращает силы: отпуск, прогулка, выспаться, просто посидеть в тишине.',
+     вопросы:['Как вам важно отдыхать?','А как сейчас отдыхаете?','Что вы для этого делаете?'],
+     пример:'Отдых бывает разный. Море и поездка за границу — это план на отпуск. А что можно прямо сейчас: выспаться, погулять в парке, сходить в бассейн.'}
+  ];
+  var ПОЛЯ=['важно','сейчас','делаю'];
+  // карты-метафоры: номер листка (сфера*3 + 0 важно, 1 сейчас, 2 делаю) → файл
+  var ОБРАЗЫ={0:{файл:'img/otnosheniya-vazhno.webp',описание:'Женщина и мужчина летят рядом над рекой на закате'},1:{файл:'img/otnosheniya-sejchas.webp',описание:'Женщина на дне колодца тянет руку вверх'},3:{файл:'img/rabota-vazhno.webp',описание:'Горные вершины на рассвете, на склоне цветы'},5:{файл:'img/rabota-delayu.webp',описание:'Дротики: часть в мишени, часть мимо, часть лежит на столе'},4:{файл:'img/rabota-sejchas.webp',описание:'Штурвал парусного корабля в шторм, на горизонте маяк и закат'},2:{файл:'img/otnosheniya-delayu.webp',описание:'Мужчина и женщина с тяжёлыми мешками стоят на краях пропасти, между ними мост'}};
+  var КЛЮЧ='упражнение-ценности-v2';
+  var данные={важно:['','','',''],сейчас:['','','',''],делаю:['','','',''],мешает:'',шаг:''};
+  try{var с=JSON.parse(localStorage.getItem(КЛЮЧ)||'null');if(с&&с.важно&&с.сейчас&&с.делаю)данные=с;}catch(e){}
+  function сохранить(){try{localStorage.setItem(КЛЮЧ,JSON.stringify(данные));}catch(e){}}
+
+  var $=function(id){return document.getElementById(id)};
+  var экраны={вход:$('вход'),сфера:$('сфера'),итог:$('итог')};
+  var шагов=СФЕРЫ.length*3,номер=0;
+
+  function показать(имя,фокус){
+    for(var к in экраны)экраны[к].hidden=(к!==имя);
+    window.scrollTo(0,0);
+    if(фокус)фокус.focus({preventScroll:true});
+  }
+  function записатьТекущий(){
+    var с=Math.floor(номер/3),п=ПОЛЯ[номер%3];
+    данные[п][с]=$('ответ').value;
+    сохранить();
+  }
+  function открытьШаг(н){
+    номер=н;
+    var с=Math.floor(н/3),т=н%3,сфера=СФЕРЫ[с];
+    $('счётчик').textContent=(с+1)+' из '+СФЕРЫ.length;
+    $('название').textContent=сфера.имя;
+    $('пояснение').textContent=сфера.пояснение;
+    $('пояснение').hidden=(т!==0);
+    $('вопрос').textContent=сфера.вопросы[т];
+    $('ответ').value=данные[ПОЛЯ[т]][с]||'';
+    var образ=ОБРАЗЫ[н];
+    $('образ').hidden=!образ;
+    if(образ){$('образ-картинка').src=образ.файл;$('образ-картинка').alt=образ.описание;}
+    $('подсказка-кнопка').hidden=(т!==0);
+    $('подсказка').textContent=сфера.пример;
+    $('подсказка').hidden=true;
+    $('подсказка-кнопка').setAttribute('aria-expanded','false');
+    $('дальше').textContent=(н===шагов-1)?'Посмотреть':'Дальше';
+    показать('сфера',$('название'));
+  }
+  function открытьИтог(){
+    var к=$('пары');к.innerHTML='';
+    СФЕРЫ.forEach(function(с,и){
+      var блок=document.createElement('div');блок.className='пара';
+      var з=document.createElement('h3');з.textContent=с.имя;блок.appendChild(з);
+      var dl=document.createElement('dl');
+      [['Важно','важно'],['Сейчас','сейчас'],['Что делаю','делаю']].forEach(function(п){
+        var текст=(данные[п[1]][и]||'').trim();
+        var d=document.createElement('div');
+        var dt=document.createElement('dt');dt.textContent=п[0];
+        var dd=document.createElement('dd');
+        if(текст){dd.textContent=текст;}else{dd.textContent='—';dd.className='пусто';}
+        d.appendChild(dt);d.appendChild(dd);dl.appendChild(d);
+      });
+      блок.appendChild(dl);к.appendChild(блок);
+    });
+    $('мешает').value=данные.мешает||'';
+    $('шаг').value=данные.шаг||'';
+    показать('итог',$('итог-заголовок'));
+  }
+
+  $('начать').onclick=function(){открытьШаг(0)};
+  $('дальше').onclick=function(){
+    записатьТекущий();
+    if(номер<шагов-1)открытьШаг(номер+1);else открытьИтог();
+  };
+  $('назад').onclick=function(){
+    записатьТекущий();
+    if(номер>0)открытьШаг(номер-1);else{показать('вход',$('начать'));}
+  };
+  $('правка').onclick=function(){открытьШаг(0)};
+  $('подсказка-кнопка').onclick=function(){
+    var п=$('подсказка'),открыта=п.hidden;
+    п.hidden=!открыта;
+    this.setAttribute('aria-expanded',открыта?'true':'false');
+  };
+  $('мешает').oninput=function(){данные.мешает=this.value;сохранить()};
+  $('шаг').oninput=function(){данные.шаг=this.value;сохранить()};
+
+  // картинка для сохранения
+  function перенос(ctx,текст,ширина){
+    var строки=[];
+    String(текст).split('\n').forEach(function(аб){
+      var слова=аб.split(/\s+/).filter(Boolean),стр='';
+      if(!слова.length){строки.push('');return;}
+      слова.forEach(function(с){
+        var проба=стр?стр+' '+с:с;
+        if(ctx.measureText(проба).width>ширина&&стр){строки.push(стр);стр=с;}else стр=проба;
+      });
+      строки.push(стр);
+    });
+    return строки;
+  }
+  function нарисовать(){
+    var W=1080,П=80,ширина=W-2*П;
+    var ПР='"Open Sans", Arial, sans-serif',ЗГ='Montserrat, Arial, sans-serif';
+    function проход(ctx,рисовать){
+      var y=П;
+      function строки(текст,шрифт,цвет,шаг){
+        ctx.font=шрифт;ctx.fillStyle=цвет;ctx.textBaseline='top';
+        перенос(ctx,текст,ширина).forEach(function(с){if(рисовать)ctx.fillText(с,П,y);y+=шаг;});
+      }
+      строки('Вы живёте так, как хочется, или так, как удобно другим?','700 46px '+ЗГ,'#2A2230',60);y+=30;
+      СФЕРЫ.forEach(function(с,и){
+        строки(с.имя,'600 34px '+ЗГ,'#D92A3E',48);y+=6;
+        [['ВАЖНО','важно'],['СЕЙЧАС','сейчас'],['ЧТО ДЕЛАЮ','делаю']].forEach(function(п,к){
+          строки(п[0],'600 24px '+ПР,'#6E6470',34);
+          строки((данные[п[1]][и]||'').trim()||'—','400 32px '+ПР,'#2A2230',46);y+=(к<2?14:38);
+        });
+      });
+      строки('Что мешает?','600 34px '+ЗГ,'#2F1C3D',48);y+=6;
+      строки((данные.мешает||'').trim()||'—','400 32px '+ПР,'#2A2230',46);y+=38;
+      строки('Что я сделаю на этой неделе','600 34px '+ЗГ,'#2F1C3D',48);y+=6;
+      строки((данные.шаг||'').trim()||'—','400 32px '+ПР,'#2A2230',46);
+      return y+П;
+    }
+    var замер=document.createElement('canvas').getContext('2d');
+    var H=проход(замер,false);
+    var c=document.createElement('canvas');c.width=W;c.height=H;
+    var ctx=c.getContext('2d');
+    ctx.fillStyle='#FFF9F4';ctx.fillRect(0,0,W,H);
+    проход(ctx,true);
+    return c;
+  }
+  $('сохранить').onclick=function(){
+    var кн=this;
+    var готово=function(){
+      var out=нарисовать();
+      out.toBlob(function(b){
+        var url=URL.createObjectURL(b),a=document.createElement('a');
+        a.href=url;a.download='мои-ответы.png';document.body.appendChild(a);a.click();a.remove();
+        setTimeout(function(){URL.revokeObjectURL(url)},3000);
+      },'image/png');
+    };
+    if(document.fonts&&document.fonts.load){
+      Promise.all([document.fonts.load('600 34px Montserrat'),document.fonts.load('700 46px Montserrat'),document.fonts.load('400 32px "Open Sans"'),document.fonts.load('600 26px "Open Sans"')]).then(готово,готово);
+    }else готово();
+  };
+})();
+</script>
+</body>
+</html>
